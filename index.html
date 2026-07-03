@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Apply saved theme immediately to prevent flash -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('dashboard-theme');
+        if (t === 'dark' || t === 'light') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (_) {}
+    })();
+  </script>
+</head>
+<body>
+  <main class="dashboard">
+
+    <!-- Greeting Widget -->
+    <section id="greeting-widget">
+      <div class="widget-content">
+        <div class="greeting-header">
+          <h1 id="greeting-text">Selamat Datang</h1>
+          <button id="theme-toggle" class="icon-btn" aria-label="Toggle tema" title="Toggle Light/Dark Mode">☀️</button>
+        </div>
+        <p id="clock-display" class="clock">00:00</p>
+        <p id="date-display" class="date"></p>
+
+        <!-- Custom name editor -->
+        <div class="name-editor" id="name-editor">
+          <span id="name-display"></span>
+          <button id="name-edit-btn" class="icon-btn" aria-label="Edit nama" title="Ubah nama">✏️</button>
+          <div id="name-input-row" class="name-input-row hidden">
+            <input
+              type="text"
+              id="name-input"
+              placeholder="Nama kamu..."
+              maxlength="60"
+              autocomplete="off"
+            />
+            <button id="name-save-btn" class="btn-sm btn-primary">Simpan</button>
+            <button id="name-cancel-btn" class="btn-sm btn-ghost">Batal</button>
+          </div>
+          <p id="name-error" class="error-message" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Focus Timer -->
+    <section id="focus-timer">
+      <div class="widget-content">
+        <h2>Focus Timer</h2>
+        <p id="timer-display" class="timer-display">25:00</p>
+        <div class="timer-controls">
+          <button id="timer-start">Start</button>
+          <button id="timer-stop">Stop</button>
+          <button id="timer-reset">Reset</button>
+        </div>
+
+        <!-- Duration setting -->
+        <div class="duration-editor" id="duration-editor">
+          <button id="duration-edit-btn" class="btn-xs btn-ghost" title="Ubah durasi">⚙️ Ubah Durasi</button>
+          <div id="duration-input-row" class="duration-input-row hidden">
+            <input
+              type="number"
+              id="duration-input"
+              min="1"
+              max="60"
+              placeholder="menit (1–60)"
+              style="width:110px"
+            />
+            <button id="duration-save-btn" class="btn-sm btn-primary">Set</button>
+            <button id="duration-cancel-btn" class="btn-sm btn-ghost">Batal</button>
+          </div>
+          <p id="duration-error" class="error-message" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Todo Manager -->
+    <section id="todo-manager">
+      <div class="widget-content">
+        <div class="section-header">
+          <h2>Daftar Tugas</h2>
+          <div class="sort-control">
+            <label for="task-sort" class="sr-only">Urutkan tugas</label>
+            <select id="task-sort" aria-label="Urutan tugas">
+              <option value="oldest-first">Terlama dulu</option>
+              <option value="newest-first">Terbaru dulu</option>
+              <option value="alpha-az">A → Z</option>
+              <option value="incomplete-first">Belum selesai dulu</option>
+            </select>
+          </div>
+        </div>
+        <form id="todo-form" class="add-form">
+          <input
+            type="text"
+            id="todo-input"
+            placeholder="Tambah tugas baru..."
+            maxlength="200"
+            autocomplete="off"
+          />
+          <button type="submit">Tambah</button>
+        </form>
+        <p id="todo-error" class="error-message" aria-live="polite"></p>
+        <ul id="todo-list" class="item-list"></ul>
+      </div>
+    </section>
+
+    <!-- Quick Links Manager -->
+    <section id="quick-links-manager">
+      <div class="widget-content">
+        <h2>Quick Links</h2>
+        <form id="links-form" class="add-form">
+          <input
+            type="text"
+            id="link-label-input"
+            placeholder="Label (opsional)"
+            maxlength="100"
+            autocomplete="off"
+          />
+          <input
+            type="text"
+            id="link-url-input"
+            placeholder="URL"
+            autocomplete="off"
+          />
+          <button type="submit">Tambah</button>
+        </form>
+        <p id="links-error" class="error-message" aria-live="polite"></p>
+        <div id="links-list" class="links-list"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Storage unavailable banner (hidden by default) -->
+  <div id="storage-banner" class="storage-banner" role="alert" hidden>
+    Data tidak akan tersimpan di antara sesi — Local Storage tidak tersedia di browser ini.
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
